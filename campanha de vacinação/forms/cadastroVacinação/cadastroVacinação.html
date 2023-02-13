@@ -1,0 +1,175 @@
+<html>
+
+<head>
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css" />
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+	<script src="script.js"></script>
+</head>
+
+<body>
+	<div class="fluig-style-guide">
+		<form name="form" role="form">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Campanha de vacinação</h3>
+				</div>
+				<div class="panel-body">
+
+					<div class="row">
+						<div class="div" id="campoNome">
+							<div class="col-md-4">
+								<label class="control-label obrigatorio" for="txtnome">Nome</label>
+								<input class="form-control" type="zoom" id="txtnome" name="txtnome" data-zoom="{
+												'displayKey':'txtNome',
+												'datasetId':'dsFuncionarios',
+												'placeholder':'Selecione seu nome',
+												'fields':[{
+															   'field':'txtNome',
+															   'label':'nome'
+														},
+														{
+															'field':'txtcpf',
+															'label':'CPF'
+													 },
+													 {
+														'field':'txtMatricula',
+														'label':'Matricula'
+													 },
+													 {
+														'field':'txtCargo',
+														'label':'Cargo'
+												   },
+												   {
+													'field':'txtSetor',
+													'label':'Setor'
+												 },
+												 {
+													'field':'txtSexo',
+													'label':'Sexo'
+												 }
+														]}" />
+
+							</div>
+						</div>
+						<div class="col-sm-3" id="txtnometerceiro">
+							<label for="txtnometerceiro">Nome</label>
+							<input type="text" class="form-control" name="txtnometerceiro">
+						</div>
+						<div class="col-sm-3">
+							<label for="txtmatricula">matrícula</label>
+							<input type="text" class="form-control" id="txtmatricula" name="txtmatricula" readonly>
+						</div>
+						<div class="col-sm-2">
+							<label for="txtsetor">setor</label>
+							<input type="text" class="form-control" id="txtsetor" name="txtsetor" readonly>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							<label for="txtcargo">cargo</label>
+							<input type="text" class="form-control" id="txtcargo" name="txtcargo" readonly>
+						</div>
+						<div class="col-sm-1">
+							<label for="txtsexo">sexo</label>
+							<input type="text" class="form-control" id="txtsexo" name="txtsexo" readonly>
+						</div>
+						<div class="col-sm-2">
+							<label for="txtcpf">cpf</label>
+							<input type="text" class="form-control" id="txtcpf" name="txtcpf" readonly>
+						</div>
+						<div class="col-sm-2" id="txtempresa">
+							<label for="txtempresa">empresa</label>
+							<input type="text" class="form-control" name="txtempresa">
+						</div>
+					</div>
+					<div class="row">
+						<!--tipo de vacina-->
+						<div class="col-sm-3">
+							<label class="control-label obrigatorio" for="txttipovacina">tipo da vacina</label>
+							<input class="form-control" type="zoom" id="txttipovacina" name="txttipovacina" data-zoom="{
+										'displayKey':'txttipo',
+										'datasetId':'dstipoVacina',
+										'placeholder':'Selecione o local',
+										'fields':[{
+													   'field':'txttipo',
+													   'label':'Nome Vacina'
+												}
+												]}" />
+						</div>
+						<!--Local da vacinação-->
+						<div class="col-sm-3">
+							<label class="control-label obrigatorio" for="txtlocalvacina">Local da vacinação</label>
+							<input class="form-control" type="zoom" id="txtlocalvacina" name="txtlocalvacina" data-zoom="{
+										'displayKey':'txtlocal',
+										'datasetId':'dslocaisVacinação',
+										'placeholder':'Selecione o local',
+										'fields':[{
+													   'field':'txtlocal',
+													   'label':'Local da vacinação'
+												}
+												]}" />
+						</div>
+						<!--Vínculo empregatício-->
+						<div class="form-group col-md-2">
+							<label>Vinculo:</label>
+							<select class="form-control formatacao" name="txtvinculo" id="txtvinculo"
+								onchange="terceiro();">
+								<option value="default"></option>
+								<option value="Empregado">Empregado</option>
+								<option value="Cedido">Cedido</option>
+								<option value="Diretor">Diretor</option>
+								<option value="estagiario">Estagiario</option>
+								<option value="Jovem Aprendiz">jovem Aprendiz</option>
+								<option value="Terceiro">Terceiro</option>
+
+							</select>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div id="tabeladep">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Adicionar Dependentes</h3>
+					</div>
+					<div class="panel-body">
+						<table tablename="dependentes" addbuttonlabel="adcionar dependente" class="table">
+							<thead>
+								<tr>
+									<td><strong>Dependente</strong></td>
+									<td><strong>Tipo de vacina</strong></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<div class="row">
+										<td class="form-group col-md-2"> <input type="text" id="nomedep" name="nomedep"
+												class="form-group"></td>
+
+										<td class="form-group col-md-2"> <select name="vacinadep" id="vacinadep"
+												class="form-control" dataset="dstipoVacina" datasetkey="txttipo"
+												datasetvalue="txttipo"></select>
+										</td>
+									</div>
+
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</div>
+			</div>
+
+		</form>
+
+
+
+	</div>
+</body>
+
+</html>
